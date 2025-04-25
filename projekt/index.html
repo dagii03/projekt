@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CookBook+</title>
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+  <header>
+    <h1>CookBook+</h1>
+    <nav>
+      <ul>
+        <li><a href="#recipes">Przepisy</a></li>
+        <li><a href="#add-recipe">Dodaj przepis</a></li>
+        <li><button id="toggle-dark">Tryb ciemny</button></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <section id="search-filter">
+      <input type="text" id="search" placeholder="Szukaj przepisu..." />
+      <select id="filter-category">
+        <option value="">Wszystkie kategorie</option>
+        <option value="śniadanie">Śniadanie</option>
+        <option value="obiad">Obiad</option>
+        <option value="kolacja">Kolacja</option>
+      </select>
+    </section>
+
+    <section id="recipes">
+      <h2>Lista przepisów</h2>
+      <div id="recipe-list" class="grid"></div>
+    </section>
+
+    <section id="add-recipe">
+      <h2>Dodaj nowy przepis</h2>
+      <form id="recipe-form">
+        <label>
+          Nazwa:
+          <input type="text" name="name" required />
+        </label>
+        <label>
+          Składniki:
+          <textarea name="ingredients" required></textarea>
+        </label>
+        <label>
+          Instrukcje:
+          <textarea name="instructions" required></textarea>
+        </label>
+        <label>
+          Kategoria:
+          <select name="category" required>
+            <option value="śniadanie">Śniadanie</option>
+            <option value="obiad">Obiad</option>
+            <option value="kolacja">Kolacja</option>
+          </select>
+        </label>
+        <button type="submit">Dodaj przepis</button>
+      </form>
+    </section>
+  </main>
+
+  <footer>
+    <p>&copy; 2025 CookBook+</p>
+  </footer>
+
+  <script src="js/main.js"></script>
+</body>
+</html>

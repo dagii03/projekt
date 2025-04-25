@@ -1,0 +1,142 @@
+/* === Główne style dla CookBook+ === */
+
+:root {
+    --color-bg: #ffffff;
+    --color-text: #111111;
+    --color-accent: #e63946;
+    --color-border: #dddddd;
+    --color-bg-alt: #f9f9f9;
+  }
+  
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --color-bg: #ffffff;
+      --color-text: #f0f0f0;
+      --color-accent: #f94144;
+      --color-border: #444;
+      --color-bg-alt: #2a2a2a;
+    }
+  }
+  
+  body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background-color: var(--color-bg);
+    color: var(--color-text);
+    line-height: 1.6;
+  }
+  
+  header {
+    background-color: var(--color-accent);
+    color: white;
+    padding: 1rem;
+    text-align: center;
+  }
+  
+  nav ul {
+    display: flex;
+    justify-content: center;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  
+  nav li {
+    margin: 0 1rem;
+  }
+  
+  nav a,
+  #toggle-dark {
+    color: white;
+    text-decoration: none;
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 1rem;
+  }
+  
+  main {
+    padding: 1rem;
+    max-width: 960px;
+    margin: 0 auto;
+  }
+  
+  #search-filter {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 2rem;
+    flex-wrap: wrap;
+  }
+  
+  #search-filter input,
+  #search-filter select {
+    padding: 0.5rem;
+    font-size: 1rem;
+    border: 1px solid var(--color-border);
+    border-radius: 4px;
+  }
+  
+  #recipe-list.grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 1rem;
+  }
+  
+  .recipe-card {
+    background-color: var(--color-bg-alt);
+    border: 1px solid var(--color-border);
+    border-radius: 8px;
+    padding: 1rem;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+  }
+  
+  form {
+    display: grid;
+    gap: 1rem;
+    background-color: var(--color-bg-alt);
+    padding: 1rem;
+    border-radius: 8px;
+    border: 1px solid var(--color-border);
+  }
+  
+  form label {
+    display: flex;
+    flex-direction: column;
+    font-weight: bold;
+  }
+  
+  form input,
+  form textarea,
+  form select,
+  form button {
+    padding: 0.5rem;
+    font-size: 1rem;
+    border: 1px solid var(--color-border);
+    border-radius: 4px;
+  }
+  
+  form button {
+    background-color: var(--color-accent);
+    color: white;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  form button:hover {
+    background-color: #d62828;
+  }
+  
+  footer {
+    text-align: center;
+    padding: 1rem;
+    background-color: var(--color-accent);
+    color: white;
+    margin-top: 2rem;
+  }
+  
+  @media screen and (max-width: 600px) {
+    #search-filter {
+      flex-direction: column;
+    }
+  }
