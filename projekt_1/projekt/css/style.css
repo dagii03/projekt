@@ -1,0 +1,226 @@
+/* === Główne style dla CookBook+ === */
+
+:root {
+    --color-bg: #ffffff;
+    --color-text: #111111;
+    --color-accent: #e63946;
+    --color-border: #dddddd;
+    --color-bg-alt: #f9f9f9;
+}
+
+@media (prefers-color-scheme: dark) {
+    :root {
+        --color-bg: #ffffff;
+        --color-text: #000000;
+        --color-accent: #f94144;
+        --color-border: #ffffff;
+        --color-bg-alt: #4a4a4a6b;
+    }
+}
+
+/* === Tryb ciemny dla CookBook+ === */
+.dark-mode {
+    --bg-primary: #121212;
+    --bg-secondary: #1e1e1e;
+    --text-primary: #f0f0f0;
+    --text-secondary: #cccccc;
+    --border-color: #333333;
+    --bg-hover: #2a2a2a;
+}
+
+/* Adjust recipe card background for dark mode */
+body.dark-mode .recipe-card {
+  background-color: #1c1c1c; /* Darker gray background */
+  color: #ffffff; /* White text */
+  border: 1px solid #333333; /* Subtle border */
+}
+
+/* Adjust form background for dark mode in 'Dodaj przepis' */
+body.dark-mode #add-recipe form {
+  background-color: #1c1c1c; /* Darker gray background */
+  color: #ffffff; /* White text */
+  border: 1px solid #333333; /* Subtle border */
+}
+
+/* Sticky footer for pages with short content */
+html, body {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background-color: var(--bg-primary);
+    color: var(--text-primary);
+    line-height: 1.6;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+main {
+    padding: 1rem;
+    max-width: 960px;
+    margin: 5rem auto 0; /* Add margin to avoid overlap with fixed header */
+    flex: 1;
+}
+
+input, textarea, select, button {
+    background-color: var(--bg-secondary);
+    color: var(--text-primary);
+    border: 1px solid var(--border-color);
+    transition: background-color 0.3s, color 0.3s;
+}
+
+input::placeholder, textarea::placeholder {
+    color: var(--text-secondary);
+}
+
+/* Ensure header spans full width and CookBook+ is centered */
+header {
+    width: 100%;
+    text-align: center;
+    padding: 1rem 0;
+    background-color: var(--color-accent);
+    color: white;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+}
+
+header h1 {
+    color: white; /* Ensure header title is visible */
+}
+
+nav ul {
+    display: flex;
+    justify-content: center;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+nav li {
+    margin: 0 1rem;
+}
+
+nav a,
+#toggle-dark {
+    color: white;
+    text-decoration: none;
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 1rem;
+}
+
+#search-filter {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 2rem;
+    flex-wrap: wrap;
+}
+
+#search-filter input,
+#search-filter select {
+    padding: 0.5rem;
+    font-size: 1rem;
+    border: 1px solid var(--color-border);
+    border-radius: 4px;
+}
+
+#recipe-list.grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 1rem;
+}
+
+.recipe-card {
+    background-color: var(--color-bg-alt);
+    border: 1px solid var(--color-border);
+    border-radius: 8px;
+    padding: 1rem;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.recipe-card:hover {
+    transform: scale(1.05); /* Slightly enlarge the card */
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2); /* Add a shadow for emphasis */
+}
+
+/* Ensure form background matches recipe card background */
+form {
+    background-color: var(--color-bg-alt);
+    color: var(--text-primary);
+    border: 1px solid var(--color-border);
+    padding: 1rem;
+    border-radius: 8px;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+form label {
+    display: flex;
+    flex-direction: column;
+    font-weight: bold;
+}
+
+form input,
+form textarea,
+form select,
+form button {
+    padding: 0.5rem;
+    font-size: 1rem;
+    border: 1px solid var(--color-border);
+    border-radius: 4px;
+}
+
+form button {
+    background-color: var(--color-accent);
+    color: white;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+form button:hover {
+    background-color: #d62828;
+}
+
+/* Ensure footer matches header color */
+footer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: var(--color-accent);
+  color: white;
+  height: 3rem; /* Adjust height as needed */
+}
+
+footer p {
+    color: var(--text-primary);
+}
+
+#toggle-dark {
+    position: fixed;
+    top: 1rem;
+    right: 1rem;
+    z-index: 100;
+    background: var(--bg-secondary);
+    border: 1px solid var(--border-color);
+    border-radius: 50%;
+    padding: 0.5rem;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+#toggle-dark:hover {
+    background: var(--bg-hover);
+}
+
+@media screen and (max-width: 600px) {
+    #search-filter {
+        flex-direction: column;
+    }
+}
