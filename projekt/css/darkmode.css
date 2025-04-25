@@ -1,7 +1,5 @@
-/* === Tryb ciemny dla CookBook+ === */
-
 :root {
-    --bg-primary: #ffffff;
+    --bg-primary: #1b1b1b;
     --bg-secondary: #f9f9f9;
     --text-primary: #222222;
     --text-secondary: #444444;
