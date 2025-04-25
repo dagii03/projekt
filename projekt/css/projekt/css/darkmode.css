@@ -1,0 +1,42 @@
+/* === Tryb ciemny dla CookBook+ === */
+
+:root {
+    --bg-primary: #1b1b1b;
+    --bg-secondary: #f9f9f9;
+    --text-primary: #222222;
+    --text-secondary: #444444;
+    --border-color: #cccccc;
+    --bg-hover: #eeeeee;
+  }
+  
+  .dark-mode {
+    --bg-primary: #121212;
+    --bg-secondary: #1e1e1e;
+    --text-primary: #f0f0f0;
+    --text-secondary: #cccccc;
+    --border-color: #333333;
+    --bg-hover: #2a2a2a;
+  }
+  
+  body {
+    background-color: var(--bg-primary);
+    color: var(--text-primary);
+    transition: background-color 0.3s, color 0.3s;
+  }
+  
+  aside, .recipe-card {
+    background-color: var(--bg-secondary);
+    color: var(--text-primary);
+  }
+  
+  input, textarea, select, button {
+    background-color: var(--bg-secondary);
+    color: var(--text-primary);
+    border: 1px solid var(--border-color);
+    transition: background-color 0.3s, color 0.3s;
+  }
+  
+  input::placeholder, textarea::placeholder {
+    color: var(--text-secondary);
+  }
+  
