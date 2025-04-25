@@ -1,5 +1,3 @@
-/* === Główne style dla CookBook+ === */
-
 :root {
     --color-bg: #ffffff;
     --color-text: #111111;
@@ -11,10 +9,10 @@
   @media (prefers-color-scheme: dark) {
     :root {
       --color-bg: #ffffff;
-      --color-text: #f0f0f0;
+      --color-text: #000000;
       --color-accent: #f94144;
-      --color-border: #444;
-      --color-bg-alt: #2a2a2a;
+      --color-border: #ffffff;
+      --color-bg-alt: #4a4a4a6b;
     }
   }
   
