@@ -1,5 +1,4 @@
 const recipeList = document.getElementById('recipe-list');
-const searchInput = document.getElementById('search');
 const toggleDark = document.getElementById('toggle-dark');
 
 // === Inicjalizacja ===
@@ -9,6 +8,57 @@ document.addEventListener('DOMContentLoaded', () => {
   // Sprawdzamy preferencje użytkownika dla ciemnego trybu
   if (localStorage.getItem('darkMode') === 'enabled') {
     document.body.classList.add('dark-mode');
+  }
+
+  const form = document.getElementById('recipe-form');
+
+  form.addEventListener('input', (event) => {
+    const target = event.target;
+    const errorElement = target.nextElementSibling;
+
+    if (target.validity.valid) {
+      if (errorElement) {
+        errorElement.textContent = '';
+        errorElement.classList.remove('error-message');
+      }
+    } else {
+      if (!errorElement) {
+        const error = document.createElement('span');
+        error.className = 'error-message';
+        target.insertAdjacentElement('afterend', error);
+      }
+      showError(target);
+    }
+  });
+
+  form.addEventListener('submit', (event) => {
+    const inputs = form.querySelectorAll('input, textarea, select');
+    let isValid = true;
+
+    inputs.forEach((input) => {
+      if (!input.validity.valid) {
+        isValid = false;
+        showError(input);
+      }
+    });
+
+    if (!isValid) {
+      event.preventDefault();
+    }
+  });
+
+  function showError(input) {
+    const errorElement = input.nextElementSibling;
+    if (input.validity.valueMissing) {
+      errorElement.textContent = 'To pole jest wymagane.';
+    } else if (input.validity.tooShort) {
+      errorElement.textContent = `Wartość musi mieć co najmniej ${input.minLength} znaków.`;
+    } else if (input.validity.tooLong) {
+      errorElement.textContent = `Wartość nie może przekraczać ${input.maxLength} znaków.`;
+    } else if (input.validity.typeMismatch) {
+      errorElement.textContent = 'Wprowadź poprawny format.';
+    }
+    errorElement.classList.add('error-message');
   }
 });
 
@@ -25,13 +75,9 @@ toggleDark.addEventListener('click', () => {
   }
 });
 
-// === Obsługa wyszukiwania ===
-searchInput.addEventListener('input', loadRecipes);
-
 // === Ładowanie przepisów z TheMealDB ===
 async function loadRecipes() {
-  const query = searchInput.value.trim();
-  const url = `https://www.themealdb.com/api/json/v1/1/search.php?s=${encodeURIComponent(query)}`;
+  const url = `https://www.themealdb.com/api/json/v1/1/search.php?s=`;
 
   try {
     const res = await fetch(url);

@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Kontakt</title>
+  <link rel="stylesheet" href="projekt/css/style.css">
+</head>
+<body>
+  <header>
+    <h1>Kontakt</h1>
+    <nav>
+      <ul>
+        <li><a href="projekt/index.html">Strona główna</a></li>
+        <li><a href="projekt/zapisz_sie_na_kurs.html">Zapisz się na kurs</a></li>
+        <li><button id="toggle-dark">Tryb ciemny</button></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <section>
+      <h2>Dane kontaktowe</h2>
+      <p>Telefon: +48 123 456 789</p>
+      <p>Email: kontakt@przyklad.pl</p>
+    </section>
+
+    <section id="faq">
+      <h2>Frequently Asked Questions</h2>
+      <details>
+        <summary>Gdzie odbywają się kursy?</summary>
+        <p>Nasze kursy odbywają się w Białymstoku, ul. Przykładowa 1.</p>
+      </details>
+      <details>
+        <summary>Czy kursy są płatne?</summary>
+        <p>Nie, kursy są bezpłatne. Możesz zapisać się bez żadnych opłat.</p>
+      </details>
+    </section>
+  </main>
+
+  <footer>
+    <p>CookBook+ &copy; 2025</p>
+  </footer>
+
+  <script>
+    document.querySelectorAll('.faq-toggle').forEach(button => {
+      button.addEventListener('click', () => {
+        const content = button.nextElementSibling;
+        const isVisible = content.style.display === 'block';
+
+        // Hide all other FAQ contents
+        document.querySelectorAll('.faq-content').forEach(faqContent => {
+          faqContent.style.display = 'none';
+        });
+
+        // Toggle the clicked FAQ content
+        content.style.display = isVisible ? 'none' : 'block';
+      });
+    });
+
+    document.getElementById('toggle-dark').addEventListener('click', () => {
+      document.body.classList.toggle('dark-mode');
+    });
+  </script>
+</body>
+</html>

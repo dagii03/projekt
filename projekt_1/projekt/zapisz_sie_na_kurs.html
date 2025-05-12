@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Zapisz się na kurs - CookBook+</title>
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+  <header>
+    <h1>Zapisz się na kurs</h1>
+    <nav>
+      <ul>
+        <li><a href="index.html">Powrót do głównej</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <section id="add-course">
+      <h2>Wypełnij formularz, aby zapisać się na kurs kulinarny</h2>
+      <form id="course-form">
+        <label>
+          Imię i nazwisko:
+          <input type="text" name="fullName" required />
+        </label>
+        <label>
+          E-mail:
+          <input type="email" name="email" required />
+        </label>
+        <label>
+          Wybierz typ kursu:
+          <select name="courseType" required>
+            <option value="wegetarian">Gotowanie dla wegetarian</option>
+            <option value="miesne">Dania mięsne</option>
+            <option value="azjatyckie">Dania azjatyckie</option>
+          </select>
+        </label>
+        <label>
+          Uwagi (opcjonalne):
+          <textarea name="comments"></textarea>
+        </label>
+        <button type="submit">Zapisz się</button>
+      </form>
+    </section>
+  </main>
+
+  <footer>
+    <p>CookBook+ &copy; 2025</p>
+  </footer>
+
+  <script src="js/main.js"></script>
+</body>
+</html>
