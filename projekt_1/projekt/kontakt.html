@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Kontakt</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/layout.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/forms.css">
+</head>
+<body>
+  <header>
+    <h1>Kontakt</h1>
+    <nav>
+      <ul>
+        <li><a href="index.html">Strona główna</a></li>
+        <li><a href="zapisz_sie_na_kurs.html">Zapisz się na kurs</a></li>
+        <li><button id="toggle-dark">Tryb ciemny</button></li>
+      </ul>
+    </nav>
+  </header>
+  <main style="padding-top: 6.5rem;">
+    <section>
+      <h2>Dane kontaktowe</h2>
+      <p>Zapraszamy do kontaktu w każdej sprawie związanej z kursami kulinarnymi!</p>
+      <address>
+        <strong>Telefon:</strong> <a href="tel:+48123456789">+48 123 456 789</a><br>
+        <strong>Email:</strong> <a href="mailto:kontakt@przyklad.pl">kontakt@przyklad.pl</a><br>
+        <strong>Adres:</strong> ul. Przykładowa 1, 15-123 Białystok
+      </address>
+    </section>
+    <section id="faq">
+      <h2>Najczęściej zadawane pytania (FAQ)</h2>
+      <details>
+        <summary>Gdzie odbywają się kursy?</summary>
+        <p>Kursy odbywają się w Białymstoku, ul. Przykładowa 1.</p>
+      </details>
+      <details>
+        <summary>Czy kursy są płatne?</summary>
+        <p>Kursy są bezpłatne.</p>
+      </details>
+      <details>
+        <summary>Czy muszę coś przynieść na kurs?</summary>
+        <p>Nie, wszystkie potrzebne rzeczy mamy na miejscu.</p>
+      </details>
+    </section>
+  </main>
+  <footer>
+    <p>CookBook+ &copy; 2025</p>
+  </footer>
+  <script>
+    document.getElementById('toggle-dark').addEventListener('click', () => {
+      document.body.classList.toggle('dark-mode');
+    });
+  </script>
+</body>
+</html>

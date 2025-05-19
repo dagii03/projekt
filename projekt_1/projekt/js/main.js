@@ -2,6 +2,7 @@ const recipeList = document.getElementById('recipe-list');
 const toggleDark = document.getElementById('toggle-dark');
 
 // === Inicjalizacja ===
+// Inicjalizacja aplikacji i ustawienie obsługi formularza oraz trybu ciemnego
 document.addEventListener('DOMContentLoaded', () => {
   loadRecipes();
 
@@ -12,6 +13,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   const form = document.getElementById('recipe-form');
 
+  // Obsługa walidacji pól formularza podczas wpisywania
   form.addEventListener('input', (event) => {
     const target = event.target;
     const errorElement = target.nextElementSibling;
@@ -31,6 +33,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 
+  // Obsługa walidacji formularza przy próbie wysłania
   form.addEventListener('submit', (event) => {
     const inputs = form.querySelectorAll('input, textarea, select');
     let isValid = true;
@@ -47,6 +50,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 
+  // Funkcja pomocnicza wyświetlająca komunikaty o błędach przy polach formularza
   function showError(input) {
     const errorElement = input.nextElementSibling;
     if (input.validity.valueMissing) {
@@ -63,6 +67,7 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 // === Przełączanie trybu ciemnego ===
+// Obsługa przycisku przełączającego tryb ciemny/jasny oraz zapisywanie preferencji w localStorage
 toggleDark.addEventListener('click', () => {
   // Przełączamy klasę dark-mode na <body>
   document.body.classList.toggle('dark-mode');
@@ -76,6 +81,7 @@ toggleDark.addEventListener('click', () => {
 });
 
 // === Ładowanie przepisów z TheMealDB ===
+// Funkcja asynchroniczna pobierająca przepisy z zewnętrznego API i wywołująca renderowanie
 async function loadRecipes() {
   const url = `https://www.themealdb.com/api/json/v1/1/search.php?s=`;
 
@@ -93,6 +99,7 @@ async function loadRecipes() {
 }
 
 // === Renderowanie przepisów ===
+// Funkcja generująca i wyświetlająca karty przepisów na stronie
 function renderRecipes(meals) {
   recipeList.innerHTML = '';
 
@@ -116,6 +123,7 @@ function renderRecipes(meals) {
 }
 
 // === Formatowanie składników z obiektu API ===
+// Funkcja formatująca listę składników i ich ilości do czytelnej formy
 function formatIngredients(meal) {
   let ingredients = '';
   for (let i = 1; i <= 20; i++) {
