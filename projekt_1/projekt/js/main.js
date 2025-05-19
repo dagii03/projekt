@@ -1,109 +1,96 @@
 const recipeList = document.getElementById('recipe-list');
 const toggleDark = document.getElementById('toggle-dark');
+let allRecipes = [];
 
 // === Inicjalizacja ===
-// Inicjalizacja aplikacji i ustawienie obsługi formularza oraz trybu ciemnego
 document.addEventListener('DOMContentLoaded', () => {
   loadRecipes();
 
-  // Sprawdzamy preferencje użytkownika dla ciemnego trybu
   if (localStorage.getItem('darkMode') === 'enabled') {
     document.body.classList.add('dark-mode');
   }
 
   const form = document.getElementById('recipe-form');
+  if (form) {
+    form.addEventListener('input', (event) => {
+      const target = event.target;
+      const errorElement = target.nextElementSibling;
 
-  // Obsługa walidacji pól formularza podczas wpisywania
-  form.addEventListener('input', (event) => {
-    const target = event.target;
-    const errorElement = target.nextElementSibling;
-
-    if (target.validity.valid) {
-      if (errorElement) {
-        errorElement.textContent = '';
-        errorElement.classList.remove('error-message');
-      }
-    } else {
-      if (!errorElement) {
-        const error = document.createElement('span');
-        error.className = 'error-message';
-        target.insertAdjacentElement('afterend', error);
-      }
-      showError(target);
-    }
-  });
-
-  // Obsługa walidacji formularza przy próbie wysłania
-  form.addEventListener('submit', (event) => {
-    const inputs = form.querySelectorAll('input, textarea, select');
-    let isValid = true;
-
-    inputs.forEach((input) => {
-      if (!input.validity.valid) {
-        isValid = false;
-        showError(input);
+      if (target.validity.valid) {
+        if (errorElement) {
+          errorElement.textContent = '';
+          errorElement.classList.remove('error-message');
+        }
+      } else {
+        if (!errorElement) {
+          const error = document.createElement('span');
+          error.className = 'error-message';
+          target.insertAdjacentElement('afterend', error);
+        }
+        showError(target);
       }
     });
 
-    if (!isValid) {
-      event.preventDefault();
-    }
-  });
+    form.addEventListener('submit', (event) => {
+      const inputs = form.querySelectorAll('input, textarea, select');
+      let isValid = true;
 
-  // Funkcja pomocnicza wyświetlająca komunikaty o błędach przy polach formularza
-  function showError(input) {
-    const errorElement = input.nextElementSibling;
-    if (input.validity.valueMissing) {
-      errorElement.textContent = 'To pole jest wymagane.';
-    } else if (input.validity.tooShort) {
-      errorElement.textContent = `Wartość musi mieć co najmniej ${input.minLength} znaków.`;
-    } else if (input.validity.tooLong) {
-      errorElement.textContent = `Wartość nie może przekraczać ${input.maxLength} znaków.`;
-    } else if (input.validity.typeMismatch) {
-      errorElement.textContent = 'Wprowadź poprawny format.';
-    }
-    errorElement.classList.add('error-message');
+      inputs.forEach((input) => {
+        if (!input.validity.valid) {
+          isValid = false;
+          showError(input);
+        }
+      });
+
+      if (!isValid) {
+        event.preventDefault();
+      }
+    });
   }
 });
 
-// === Przełączanie trybu ciemnego ===
-// Obsługa przycisku przełączającego tryb ciemny/jasny oraz zapisywanie preferencji w localStorage
+function showError(input) {
+  const errorElement = input.nextElementSibling;
+  if (input.validity.valueMissing) {
+    errorElement.textContent = 'To pole jest wymagane.';
+  } else if (input.validity.tooShort) {
+    errorElement.textContent = `Wartość musi mieć co najmniej ${input.minLength} znaków.`;
+  } else if (input.validity.tooLong) {
+    errorElement.textContent = `Wartość nie może przekraczać ${input.maxLength} znaków.`;
+  } else if (input.validity.typeMismatch) {
+    errorElement.textContent = 'Wprowadź poprawny format.';
+  }
+  errorElement.classList.add('error-message');
+}
+
+// === Tryb ciemny ===
 toggleDark.addEventListener('click', () => {
-  // Przełączamy klasę dark-mode na <body>
   document.body.classList.toggle('dark-mode');
-  
-  // Zapisujemy stan trybu ciemnego w localStorage, aby utrzymać go po odświeżeniu
-  if (document.body.classList.contains('dark-mode')) {
-    localStorage.setItem('darkMode', 'enabled');
-  } else {
-    localStorage.setItem('darkMode', 'disabled');
-  }
+  localStorage.setItem('darkMode', document.body.classList.contains('dark-mode') ? 'enabled' : 'disabled');
 });
 
-// === Ładowanie przepisów z TheMealDB ===
-// Funkcja asynchroniczna pobierająca przepisy z zewnętrznego API i wywołująca renderowanie
+// === Ładowanie przepisów ===
 async function loadRecipes() {
   const url = `https://www.themealdb.com/api/json/v1/1/search.php?s=`;
 
   try {
     const res = await fetch(url);
     if (!res.ok) throw new Error('Błąd ładowania danych z API.');
-
     const data = await res.json();
-    const meals = data.meals || [];
 
-    renderRecipes(meals);
+    allRecipes = data.meals || [];
+    populateCategories(allRecipes);
+    renderRecipes(allRecipes);
   } catch (err) {
     recipeList.innerHTML = `<p class="error">Nie udało się pobrać danych: ${err.message}</p>`;
   }
 }
 
 // === Renderowanie przepisów ===
-// Funkcja generująca i wyświetlająca karty przepisów na stronie
 function renderRecipes(meals) {
   recipeList.innerHTML = '';
 
-  if (meals.length === 0) {
+  if (!meals.length) {
     recipeList.innerHTML = '<p>Brak pasujących przepisów.</p>';
     return;
   }
@@ -122,16 +109,53 @@ function renderRecipes(meals) {
   });
 }
 
-// === Formatowanie składników z obiektu API ===
-// Funkcja formatująca listę składników i ich ilości do czytelnej formy
+// === Składniki ===
 function formatIngredients(meal) {
   let ingredients = '';
   for (let i = 1; i <= 20; i++) {
     const ingredient = meal[`strIngredient${i}`];
     const measure = meal[`strMeasure${i}`];
     if (ingredient && ingredient.trim()) {
-      ingredients += `- ${measure?.trim()} ${ingredient.trim()}<br>`;
+      ingredients += `- ${measure?.trim() || ''} ${ingredient.trim()}<br>`;
     }
   }
   return ingredients || 'brak składników';
+}
+
+// === Kategorie ===
+function populateCategories(recipes) {
+  const categorySelect = document.getElementById('category');
+  if (!categorySelect) return;
+
+  const categories = [...new Set(recipes.map(r => r.strCategory))];
+  categories.forEach(cat => {
+    const opt = document.createElement('option');
+    opt.value = cat;
+    opt.textContent = cat;
+    categorySelect.appendChild(opt);
+  });
+}
+
+// === Filtrowanie ===
+function applyFilters() {
+  const category = document.getElementById("category").value;
+  const ingredient = document.getElementById("ingredient").value.trim().toLowerCase();
+
+  let filtered = [...allRecipes];
+
+  if (category) {
+    filtered = filtered.filter(r => r.strCategory === category);
+  }
+
+  if (ingredient) {
+    filtered = filtered.filter(meal => {
+      for (let i = 1; i <= 20; i++) {
+        const ing = meal[`strIngredient${i}`];
+        if (ing && ing.toLowerCase().includes(ingredient)) return true;
+      }
+      return false;
+    });
+  }
+
+  renderRecipes(filtered);
 }

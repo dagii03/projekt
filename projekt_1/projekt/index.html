@@ -22,6 +22,19 @@
   <main>
     <section id="recipes">
       <h2>Lista przepisów</h2>
+
+      <div class="filter">
+        <label for="category">Kategoria:</label>
+        <select id="category">
+          <option value="">-- wszystkie --</option>
+        </select>
+
+        <label for="ingredient">Składnik:</label>
+        <input type="text" id="ingredient" placeholder="np. jajka" />
+
+        <button onclick="applyFilters()">Filtruj</button>
+      </div>
+
       <div id="recipe-list" class="grid"></div>
     </section>
   </main>
