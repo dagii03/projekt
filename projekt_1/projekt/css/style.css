@@ -8,6 +8,13 @@
     --color-bg-alt: #f9f9f9;
 }
 
+/* Poprawka: zapewnij czytelność <select> i <option> w jasnym trybie */
+select,
+select option {
+    background-color: var(--color-bg);   /* #ffffff */
+    color: var(--color-text);            /* #111111 */
+}
+
 @media (prefers-color-scheme: dark) {
     :root {
         --color-bg: #ffffff;
