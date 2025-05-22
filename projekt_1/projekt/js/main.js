@@ -159,3 +159,61 @@ function applyFilters() {
 
   renderRecipes(filtered);
 }
+
+document.addEventListener("DOMContentLoaded", () => {
+    const recipeForm = document.getElementById('recipe-form');
+  const courseForm = document.getElementById('course-form');
+
+  if (recipeForm) {
+    recipeForm.addEventListener('input', (event) => {
+      const target = event.target;
+      const errorElement = target.nextElementSibling;
+
+      if (target.validity.valid) {
+        if (errorElement) {
+          errorElement.textContent = '';
+          errorElement.classList.remove('error-message');
+        }
+      } else {
+        if (!errorElement) {
+          const error = document.createElement('span');
+          error.className = 'error-message';
+          target.insertAdjacentElement('afterend', error);
+        }
+        showError(target);
+      }
+    });
+
+    recipeForm.addEventListener('submit', (event) => {
+      const inputs = recipeForm.querySelectorAll('input, textarea, select');
+      let isValid = true;
+
+      inputs.forEach((input) => {
+        if (!input.validity.valid) {
+          isValid = false;
+          showError(input);
+        }
+      });
+
+      if (!isValid) {
+        event.preventDefault();
+      }
+    });
+  }
+
+  if (courseForm) {
+    courseForm.addEventListener("submit", (e) => {
+      e.preventDefault();
+      alert("OK! Formularz został pomyślnie wysłany.");
+      courseForm.reset();
+    });
+  }
+
+  if (form) {
+    form.addEventListener("submit", (e) => {
+      e.preventDefault();
+      alert("OK! Formularz został pomyślnie wysłany.");
+      form.reset();
+    });
+  }
+});
