@@ -64,10 +64,13 @@ function showError(input) {
 }
 
 // === Tryb ciemny ===
-toggleDark.addEventListener('click', () => {
-  document.body.classList.toggle('dark-mode');
-  localStorage.setItem('darkMode', document.body.classList.contains('dark-mode') ? 'enabled' : 'disabled');
-});
+if (toggleDark) {
+  toggleDark.addEventListener('click', () => {
+    document.body.classList.toggle('dark-mode');
+    localStorage.setItem('darkMode', document.body.classList.contains('dark-mode') ? 'enabled' : 'disabled');
+  });
+}
+
 
 // === Ładowanie przepisów ===
 async function loadRecipes() {
@@ -88,6 +91,8 @@ async function loadRecipes() {
 
 // === Renderowanie przepisów ===
 function renderRecipes(meals) {
+  if (!recipeList) return;
+
   recipeList.innerHTML = '';
 
   if (!meals.length) {
@@ -108,6 +113,7 @@ function renderRecipes(meals) {
     recipeList.appendChild(card);
   });
 }
+
 
 // === Składniki ===
 function formatIngredients(meal) {
