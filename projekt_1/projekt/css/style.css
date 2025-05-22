@@ -8,7 +8,7 @@
     --color-bg-alt: #f9f9f9;
 }
 
-/* Poprawka: zapewnij czytelność <select> i <option> w jasnym trybie */
+
 select,
 select option {
     background-color: var(--color-bg);   /* #ffffff */
@@ -35,21 +35,21 @@ select option {
     --bg-hover: #2a2a2a;
 }
 
-/* Adjust recipe card background for dark mode */
+
 body.dark-mode .recipe-card {
-  background-color: #1c1c1c; /* Darker gray background */
-  color: #ffffff; /* White text */
-  border: 1px solid #333333; /* Subtle border */
+  background-color: #1c1c1c; 
+  color: #ffffff; 
+  border: 1px solid #333333; 
 }
 
-/* Adjust form background for dark mode in 'Zapisz się na kurs' */
+
 body.dark-mode #add-recipe form {
-  background-color: #1c1c1c; /* Darker gray background */
-  color: #ffffff; /* White text */
-  border: 1px solid #333333; /* Subtle border */
+  background-color: #1c1c1c; 
+  color: #ffffff; 
+  border: 1px solid #333333; 
 }
 
-/* Sticky footer for pages with short content */
+
 html, body {
   height: 100%;
   display: flex;
@@ -69,7 +69,7 @@ body {
 main {
     padding: 1rem;
     max-width: 960px;
-    margin: 5rem auto 0; /* Add margin to avoid overlap with fixed header */
+    margin: 5rem auto 0; 
     flex: 1;
 }
 
@@ -84,7 +84,7 @@ input::placeholder, textarea::placeholder {
     color: var(--text-secondary);
 }
 
-/* Ensure header spans full width and CookBook+ is centered */
+
 header {
     width: 100%;
     text-align: center;
@@ -98,7 +98,7 @@ header {
 }
 
 header h1 {
-    color: white; /* Ensure header title is visible */
+    color: white; 
 }
 
 nav ul {
@@ -129,6 +129,9 @@ nav a,
     gap: 1rem;
 }
 
+/*
+  .recipe-card - stylizuje kartę przepisu (tło, obramowanie, zaokrąglenie, padding, cień, animacja)
+*/
 .recipe-card {
     background-color: var(--color-bg-alt);
     border: 1px solid var(--color-border);
@@ -138,12 +141,17 @@ nav a,
     transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
+/*
+  .recipe-card:hover - powiększa i podkreśla kartę przepisu po najechaniu myszką
+*/
 .recipe-card:hover {
-    transform: scale(1.05); /* Slightly enlarge the card */
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2); /* Add a shadow for emphasis */
+    transform: scale(1.05); 
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2); 
 }
 
-/* Ensure form background matches recipe card background */
+/*
+  form - stylizuje formularze (tło, kolor tekstu, obramowanie, padding, zaokrąglenie, animacja)
+*/
 form {
     background-color: var(--color-bg-alt);
     color: var(--text-primary);
@@ -181,7 +189,7 @@ form button:hover {
     background-color: #d62828;
 }
 
-/* Add a dark gray background to the form */
+
 #course-form {
   background-color: #333;
   color: #fff;
@@ -189,14 +197,14 @@ form button:hover {
   border-radius: 5px;
 }
 
-/* Ensure footer matches header color */
+
 footer {
   display: flex;
   justify-content: center;
   align-items: center;
   background-color: var(--color-accent);
   color: white;
-  height: 3rem; /* Adjust height as needed */
+  height: 3rem; 
 }
 
 footer p {
@@ -220,7 +228,7 @@ footer p {
     background: var(--bg-hover);
 }
 
-/* Style for FAQ section */
+/* === FAQ Section === */
 details {
   background-color: var(--color-accent);
   color: white;
@@ -231,7 +239,7 @@ details {
   cursor: pointer;
 }
 
-/* Ensure FAQ buttons have a fixed width to prevent resizing */
+
 details summary {
   display: inline-block;
   width: 100%;
