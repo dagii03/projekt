@@ -1,8 +1,12 @@
+// Pobiera listę przepisów z API i wyświetla je na stronie
+// oraz inicjalizuje tryb ciemny i walidację formularza
 const recipeList = document.getElementById('recipe-list');
 const toggleDark = document.getElementById('toggle-dark');
 let allRecipes = [];
 
 // === Inicjalizacja ===
+// Po załadowaniu DOM ładuje przepisy, ustawia tryb ciemny i obsługuje formularz
+// (walidacja pól formularza)
 document.addEventListener('DOMContentLoaded', () => {
   loadRecipes();
 
@@ -12,6 +16,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   const form = document.getElementById('recipe-form');
   if (form) {
+    // Obsługa walidacji pól formularza na bieżąco
     form.addEventListener('input', (event) => {
       const target = event.target;
       const errorElement = target.nextElementSibling;
@@ -31,6 +36,7 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     });
 
+    // Obsługa walidacji przy wysyłaniu formularza
     form.addEventListener('submit', (event) => {
       const inputs = form.querySelectorAll('input, textarea, select');
       let isValid = true;
@@ -49,6 +55,7 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 });
 
+// Wyświetla komunikat o błędzie pod polem formularza
 function showError(input) {
   const errorElement = input.nextElementSibling;
   if (input.validity.valueMissing) {
@@ -64,6 +71,7 @@ function showError(input) {
 }
 
 // === Tryb ciemny ===
+// Przełącza tryb ciemny i zapisuje preferencję w localStorage
 if (toggleDark) {
   toggleDark.addEventListener('click', () => {
     document.body.classList.toggle('dark-mode');
@@ -71,8 +79,8 @@ if (toggleDark) {
   });
 }
 
-
 // === Ładowanie przepisów ===
+// Pobiera przepisy z zewnętrznego API i wywołuje renderowanie oraz kategorie
 async function loadRecipes() {
   const url = `https://www.themealdb.com/api/json/v1/1/search.php?s=`;
 
@@ -90,6 +98,7 @@ async function loadRecipes() {
 }
 
 // === Renderowanie przepisów ===
+// Tworzy i wyświetla karty przepisów na podstawie przekazanej listy
 function renderRecipes(meals) {
   if (!recipeList) return;
 
@@ -114,8 +123,8 @@ function renderRecipes(meals) {
   });
 }
 
-
 // === Składniki ===
+// Formatuje listę składników i miar dla danego przepisu
 function formatIngredients(meal) {
   let ingredients = '';
   for (let i = 1; i <= 20; i++) {
@@ -129,6 +138,7 @@ function formatIngredients(meal) {
 }
 
 // === Kategorie ===
+// Wypełnia select z kategoriami na podstawie pobranych przepisów
 function populateCategories(recipes) {
   const categorySelect = document.getElementById('category');
   if (!categorySelect) return;
@@ -143,6 +153,7 @@ function populateCategories(recipes) {
 }
 
 // === Filtrowanie ===
+// Filtrowanie przepisów po kategorii i składniku, a następnie renderowanie wyników
 function applyFilters() {
   const category = document.getElementById("category").value;
   const ingredient = document.getElementById("ingredient").value.trim().toLowerCase();
@@ -166,11 +177,13 @@ function applyFilters() {
   renderRecipes(filtered);
 }
 
+// Inicjalizuje obsługę formularzy i walidację po załadowaniu DOM
 document.addEventListener("DOMContentLoaded", () => {
-    const recipeForm = document.getElementById('recipe-form');
+  const recipeForm = document.getElementById('recipe-form');
   const courseForm = document.getElementById('course-form');
 
   if (recipeForm) {
+    // Walidacja formularza przepisu na bieżąco
     recipeForm.addEventListener('input', (event) => {
       const target = event.target;
       const errorElement = target.nextElementSibling;
@@ -190,6 +203,7 @@ document.addEventListener("DOMContentLoaded", () => {
       }
     });
 
+    // Walidacja przy wysyłaniu formularza przepisu
     recipeForm.addEventListener('submit', (event) => {
       const inputs = recipeForm.querySelectorAll('input, textarea, select');
       let isValid = true;
@@ -208,6 +222,7 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   if (courseForm) {
+    // Zapobiega domyślnej wysyłce formularza kursu
     courseForm.addEventListener("submit", (e) => {
       e.preventDefault();
       alert("OK! Formularz został pomyślnie wysłany.");
